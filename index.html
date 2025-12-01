@@ -3,33 +3,38 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I'm Juggler EX Simulator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>I'm Juggler EX Simulator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
 
 <body>
     <div id="machine-container">
-        <!-- Top Marquee / Bonus Info -->
+        <!-- Top Marquee -->
         <div id="top-marquee">
-            <div class="marquee-text">I'm Juggler EX</div>
+            <div class="marquee-text">VEGAS JUGGLER</div>
             <div id="bonus-counters">
                 <div class="counter">
                     <span class="label">BIG</span>
-                    <span class="value" id="big-count">0</span>
+                    <div class="value" id="big-count">0</div>
                 </div>
                 <div class="counter">
                     <span class="label">REG</span>
-                    <span class="value" id="reg-count">0</span>
+                    <div class="value" id="reg-count">0</div>
                 </div>
                 <div class="counter">
                     <span class="label">GAME</span>
-                    <span class="value" id="game-count">0</span>
+                    <div class="value" id="game-count">0</div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Reel Glass Area -->
+        <!-- Reel Area -->
         <div id="reel-glass">
             <div id="reels-viewport">
                 <div class="reel-col">
@@ -41,71 +46,59 @@
                 <div class="reel-col">
                     <div class="reel-strip" id="reel-3"></div>
                 </div>
-                <!-- Reel Shadow Overlay for curvature effect -->
-                <div class="reel-overlay"></div>
             </div>
 
-            <!-- GOGO Lamp (Bottom Left of Glass) -->
+            <!-- Neon GOGO Lamp -->
             <div id="gogo-lamp">
                 <div class="gogo-text">GOGO!</div>
                 <div class="gogo-sub">CHANCE</div>
             </div>
-
-            <!-- Payout/Credit Display (Digital segments inside glass) -->
-            <div id="digital-display">
-                <div class="digi-group">
-                    <span class="digi-label">CREDIT</span>
-                    <span class="digi-val" id="credit-val">50</span>
-                </div>
-                <div class="digi-group">
-                    <span class="digi-label">PAYOUT</span>
-                    <span class="digi-val" id="payout-val">0</span>
-                </div>
-            </div>
         </div>
 
-        <!-- Control Panel (Bottom) -->
+        <!-- Control Panel -->
         <div id="control-panel">
-            <div id="left-controls">
-                <div id="lever-area">
-                    <div id="lever-ball"></div>
-                    <div id="lever-stick"></div>
-                    <div id="lever-base"></div>
+            <!-- Row 1: Displays -->
+            <div class="control-row">
+                <div id="digital-display">
+                    <div class="digi-group">
+                        <span class="digi-label">CREDIT</span>
+                        <span class="digi-val" id="credit-val">50</span>
+                    </div>
+                    <div class="digi-group">
+                        <span class="digi-label">PAYOUT</span>
+                        <span class="digi-val" id="payout-val">0</span>
+                    </div>
                 </div>
-                <button id="btn-maxbet" class="round-btn">MAX<br>BET</button>
+                <!-- Insert Coin -->
+                <button id="btn-insert" class="btn-primary"
+                    style="width: 50px; height: 50px; font-size: 0.7rem;">COIN</button>
             </div>
 
-            <div id="center-controls">
-                <div class="stop-btn-group">
-                    <button id="btn-stop-1" class="stop-btn" data-reel="0">STOP</button>
-                    <div class="btn-label">LEFT</div>
-                </div>
-                <div class="stop-btn-group">
-                    <button id="btn-stop-2" class="stop-btn" data-reel="1">STOP</button>
-                    <div class="btn-label">CENTER</div>
-                </div>
-                <div class="stop-btn-group">
-                    <button id="btn-stop-3" class="stop-btn" data-reel="2">STOP</button>
-                    <div class="btn-label">RIGHT</div>
-                </div>
-            </div>
+            <!-- Row 2: Actions -->
+            <div class="control-row" style="justify-content: center; gap: 20px;">
+                <button id="btn-maxbet" class="btn-primary">MAX<br>BET</button>
 
-            <div id="right-controls">
-                <button id="btn-insert" class="rect-btn">INSERT<br>COIN</button>
+                <!-- Stop Buttons -->
+                <button id="btn-stop-1" class="btn-stop" data-reel="0">1</button>
+                <button id="btn-stop-2" class="btn-stop" data-reel="1">2</button>
+                <button id="btn-stop-3" class="btn-stop" data-reel="2">3</button>
+
+                <!-- Spin Button (Replaces Lever) -->
+                <div id="lever-area">SPIN</div>
             </div>
         </div>
 
-        <!-- Settings (Hidden/Overlay) -->
+        <!-- Settings -->
         <div id="settings-overlay">
-            <label>Setting: <select id="setting-select">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6" selected>6</option>
-                </select></label>
-            <button id="btn-reset">RESET</button>
+            <select id="setting-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6" selected>6</option>
+            </select>
+            <button id="btn-reset">R</button>
         </div>
     </div>
 

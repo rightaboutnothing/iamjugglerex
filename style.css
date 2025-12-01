@@ -1,325 +1,316 @@
 :root {
-    --machine-bg: #111;
-    --glass-bg: #000;
-    --reel-bg: #fff;
-    --led-red: #ff0000;
-    --led-off: #330000;
-    --gold: #d4af37;
-    --silver: #c0c0c0;
-    --cabinet-width: 480px;
-    /* Mobile-ish / Portrait aspect */
-    --cabinet-height: 800px;
+    --primary-glow: #d4af37;
+    /* Gold */
+    --secondary-glow: #b026ff;
+    /* Neon Purple */
+    --bg-dark: #0a0a0a;
+    --glass-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
 }
 
 body {
-    background-color: #222;
+    background-color: #000;
+    background-image: radial-gradient(circle at 50% 50%, #1a0b2e 0%, #000000 100%);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    /* Modern font */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
-    font-family: 'Arial', sans-serif;
-}
-
-#machine-container {
-    width: var(--cabinet-width);
-    height: var(--cabinet-height);
-    background: linear-gradient(to bottom, #ff69b4, #c71585);
-    /* Pink Juggler style */
-    border-radius: 20px;
-    border: 10px solid #silver;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    position: relative;
     overflow: hidden;
 }
 
-/* Top Marquee */
-#top-marquee {
-    height: 120px;
-    background: #333;
-    border-bottom: 5px solid var(--gold);
+#machine-container {
+    width: 100%;
+    max-width: 600px;
+    /* Wider for video slot feel */
+    height: 90vh;
+    background: #111;
+    border-radius: 30px;
+    position: relative;
+    box-shadow:
+        0 0 50px rgba(176, 38, 255, 0.2),
+        inset 0 0 100px rgba(0, 0, 0, 0.8);
+    border: 2px solid #333;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+}
+
+/* Background Image Layer */
+#machine-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('assets/vegas_bg_v2.png');
+    /* Will use if generated */
+    background-size: cover;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+/* Top Area */
+#top-marquee {
+    height: 100px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    color: white;
+    padding: 0 20px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5));
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 .marquee-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--gold);
-    text-shadow: 0 0 5px #fff;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: var(--primary-glow);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px var(--primary-glow);
 }
 
 #bonus-counters {
     display: flex;
-    gap: 20px;
+    gap: 15px;
 }
 
 .counter {
-    background: #000;
-    padding: 5px 10px;
-    border: 1px solid #555;
-    border-radius: 4px;
     text-align: center;
 }
 
 .counter .label {
-    display: block;
-    font-size: 0.7rem;
-    color: #aaa;
+    font-size: 0.6rem;
+    color: #888;
+    letter-spacing: 1px;
 }
 
 .counter .value {
-    font-family: 'Courier New', monospace;
     font-size: 1.2rem;
-    color: var(--led-red);
+    color: #fff;
     font-weight: bold;
+    text-shadow: 0 0 5px #fff;
 }
 
-/* Reel Glass Area */
+/* Reel Area */
 #reel-glass {
     flex: 1;
-    background: #000;
     position: relative;
+    z-index: 2;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+#reels-viewport {
+    width: 90%;
+    height: 240px;
+    /* 3x80px */
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 30px #000;
+}
+
+.reel-col {
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to right, #e0e0e0, #fff 20%, #fff 80%, #e0e0e0);
+    /* Metallic sheen */
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Shadow Overlay for 3D effect */
+.reel-col::after {
+    content: '';
+    position: absolute;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.6) 100%);
     pointer-events: none;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.7) 100%);
-    z-index: 10;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
 }
 
-/* GOGO Lamp */
+.reel-strip {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    will-change: transform;
+}
+
+/* GOGO Lamp - Neon Style */
 #gogo-lamp {
     position: absolute;
     bottom: 20px;
-    left: 30px;
-    width: 80px;
-    height: 60px;
-    background: #111;
-    border: 2px solid #333;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.3;
-    /* Off state */
-    transition: opacity 0.1s;
+    left: 20px;
+    z-index: 10;
+    opacity: 0.2;
+    transition: all 0.2s;
+    filter: grayscale(100%);
 }
 
 #gogo-lamp.on {
     opacity: 1;
-    box-shadow: 0 0 30px #ff0055;
-    background: radial-gradient(circle, #ff3366 0%, #330000 100%);
+    filter: grayscale(0%);
+    animation: neonPulse 1s infinite alternate;
+}
+
+@keyframes neonPulse {
+    from {
+        filter: drop-shadow(0 0 10px #ff00de) drop-shadow(0 0 20px #ff00de);
+    }
+
+    to {
+        filter: drop-shadow(0 0 20px #ff00de) drop-shadow(0 0 40px #ff00de);
+    }
 }
 
 .gogo-text {
     font-family: 'Arial Black', sans-serif;
-    font-size: 1.5rem;
-    color: #ff0055;
-    text-shadow: 0 0 5px #ff0055;
-    transform: skewX(-10deg);
+    font-size: 2rem;
+    color: #fff;
+    -webkit-text-stroke: 1px #ff00de;
+    text-shadow: 0 0 10px #ff00de;
+    transform: rotate(-5deg);
 }
 
 .gogo-sub {
-    font-size: 0.6rem;
-    color: #ff0055;
-    letter-spacing: 2px;
+    font-size: 0.8rem;
+    color: #00ffff;
+    text-align: center;
+    text-shadow: 0 0 5px #00ffff;
+    letter-spacing: 5px;
 }
 
-/* Digital Display (Credit/Payout) */
+/* Controls */
+#control-panel {
+    height: 180px;
+    background: linear-gradient(to bottom, #222, #111);
+    z-index: 2;
+    border-top: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.control-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Digital Displays */
 #digital-display {
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    text-align: right;
+    display: flex;
+    gap: 20px;
 }
 
 .digi-group {
-    margin-bottom: 5px;
-}
-
-.digi-label {
-    font-size: 0.7rem;
-    color: #888;
-    margin-right: 5px;
-}
-
-.digi-val {
-    font-family: 'Courier New', monospace;
-    font-size: 1.2rem;
-    color: var(--led-red);
-    background: #111;
-    padding: 2px 5px;
+    background: #000;
+    padding: 5px 15px;
+    border-radius: 20px;
     border: 1px solid #333;
-}
-
-/* Control Panel */
-#control-panel {
-    height: 200px;
-    background: #c0c0c0;
-    /* Silver panel */
-    border-top: 5px solid #888;
     display: flex;
-    padding: 10px;
-    box-sizing: border-box;
-    position: relative;
-}
-
-#left-controls {
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    padding-bottom: 20px;
-}
-
-#lever-area {
-    width: 60px;
-    height: 60px;
-    position: relative;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-#lever-base {
-    width: 50px;
-    height: 50px;
-    background: #333;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 0;
-    left: 5px;
-    border: 2px solid #555;
-}
-
-#lever-stick {
-    width: 10px;
-    height: 40px;
-    background: #888;
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
-    transform: translateX(-50%);
-}
-
-#lever-ball {
-    width: 30px;
-    height: 30px;
-    background: radial-gradient(circle at 30% 30%, #ff3333, #990000);
-    border-radius: 50%;
-    position: absolute;
-    top: -10px;
-    left: 15px;
-    transition: top 0.1s;
-}
-
-#lever-area:active #lever-ball {
-    top: 20px;
-    /* Pull down effect */
-}
-
-#btn-maxbet {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #ffcc00, #cc9900);
-    border: 2px solid #aa8800;
-    font-size: 0.7rem;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-    box-shadow: 0 3px 0 #886600;
-}
-
-#btn-maxbet:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 #886600;
-}
-
-#center-controls {
-    flex: 1;
-    display: flex;
-    justify-content: center;
     align-items: center;
     gap: 10px;
 }
 
-.stop-btn-group {
-    text-align: center;
+.digi-label {
+    color: #888;
+    font-size: 0.7rem;
 }
 
-.stop-btn {
+.digi-val {
+    color: #fff;
+    font-family: monospace;
+    font-size: 1.2rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(to bottom, #d4af37, #aa8822);
+    border: none;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    color: #000;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    transition: transform 0.1s;
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+.btn-stop {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #ff3333, #990000);
-    /* Red buttons usually? Or Blue? Juggler is usually Red or Black? Let's go Red/Orange */
-    background: radial-gradient(circle at 30% 30%, #ff4444, #aa0000);
-    border: 3px solid #cc0000;
+    background: linear-gradient(to bottom, #ff3333, #aa0000);
+    border: 2px solid #ff6666;
     color: white;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 4px 0 #660000;
-    margin-bottom: 5px;
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
 }
 
-.stop-btn:active {
+.btn-stop:active {
     transform: translateY(2px);
-    box-shadow: 0 2px 0 #660000;
 }
 
-.stop-btn:disabled {
-    filter: grayscale(0.8);
-    cursor: not-allowed;
+.btn-stop:disabled {
+    background: #333;
+    border-color: #444;
+    color: #555;
+    box-shadow: none;
 }
 
-.btn-label {
-    font-size: 0.6rem;
-    color: #333;
-    font-weight: bold;
-}
-
-#right-controls {
+#lever-area {
+    /* Virtual Lever Button for Mobile/Web ease */
     width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #ff0000 0%, #550000 100%);
+    border-radius: 50%;
+    border: 4px solid #333;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 20px;
-}
-
-#btn-insert {
-    width: 60px;
-    height: 40px;
-    background: #ddd;
-    border: 2px solid #999;
-    font-size: 0.7rem;
+    align-items: center;
     cursor: pointer;
-    box-shadow: 0 3px 0 #777;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-shadow: 0 1px 2px black;
 }
 
-#btn-insert:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 #777;
+#lever-area:active {
+    transform: scale(0.95);
 }
 
 #settings-overlay {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 5px;
-    border-radius: 5px;
-    color: white;
-    font-size: 0.8rem;
-    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#settings-overlay:hover {
+    opacity: 1;
 }
