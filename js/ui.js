@@ -4,7 +4,7 @@ export class UI {
         document.getElementById('btn-maxbet').addEventListener('click', () => game.maxBet());
 
         // Lever
-        const lever = document.getElementById('lever-container');
+        const lever = document.getElementById('lever-area');
         lever.addEventListener('mousedown', () => {
             // Visual feedback
         });

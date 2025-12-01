@@ -3,9 +3,9 @@ import { SYMBOLS, REEL_STRIPS } from './logic.js';
 export class Reel {
     constructor(id, element, stripIndex) {
         this.id = id;
-        this.element = element;
+        this.element = element; // This IS the .reel-strip now
         this.strip = REEL_STRIPS[stripIndex];
-        this.stripElement = element.querySelector('.reel-strip');
+        this.stripElement = element; // Direct reference
         this.position = 0; // 0 to 20
         this.isSpinning = false;
         this.speed = 0;

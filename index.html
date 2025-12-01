@@ -1,83 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I'm Juggler EX Simulator</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="game-container">
-        <div id="cabinet">
-            <img src="assets/cabinet.png" alt="Cabinet Background" id="cabinet-bg">
-            
-            <div id="top-panel">
-                <div id="bonus-counter">
-                    <div class="counter-group">
-                        <span class="label">BIG</span>
-                        <span class="value" id="big-count">0</span>
-                    </div>
-                    <div class="counter-group">
-                        <span class="label">REG</span>
-                        <span class="value" id="reg-count">0</span>
-                    </div>
-                    <div class="counter-group">
-                        <span class="label">GAMES</span>
-                        <span class="value" id="game-count">0</span>
-                    </div>
+    <div id="machine-container">
+        <!-- Top Marquee / Bonus Info -->
+        <div id="top-marquee">
+            <div class="marquee-text">I'm Juggler EX</div>
+            <div id="bonus-counters">
+                <div class="counter">
+                    <span class="label">BIG</span>
+                    <span class="value" id="big-count">0</span>
                 </div>
-            </div>
-
-            <div id="reel-window">
-                <div class="reel-container" id="reel-1">
-                    <div class="reel-strip"></div>
+                <div class="counter">
+                    <span class="label">REG</span>
+                    <span class="value" id="reg-count">0</span>
                 </div>
-                <div class="reel-container" id="reel-2">
-                    <div class="reel-strip"></div>
-                </div>
-                <div class="reel-container" id="reel-3">
-                    <div class="reel-strip"></div>
-                </div>
-                
-                <div id="gogo-lamp" class="off">GOGO!</div>
-            </div>
-
-            <div id="control-panel">
-                <div id="left-controls">
-                    <button id="btn-insert" class="control-btn">INSERT</button>
-                    <div id="credit-display">CREDIT: <span id="credit-val">50</span></div>
-                    <div id="payout-display">PAYOUT: <span id="payout-val">0</span></div>
-                </div>
-
-                <div id="center-controls">
-                    <button id="btn-maxbet" class="control-btn round-btn">MAX<br>BET</button>
-                    <div id="stop-buttons">
-                        <button id="btn-stop-1" class="stop-btn" data-reel="0">STOP</button>
-                        <button id="btn-stop-2" class="stop-btn" data-reel="1">STOP</button>
-                        <button id="btn-stop-3" class="stop-btn" data-reel="2">STOP</button>
-                    </div>
-                </div>
-
-                <div id="lever-container">
-                    <div id="lever-ball"></div>
+                <div class="counter">
+                    <span class="label">GAME</span>
+                    <span class="value" id="game-count">0</span>
                 </div>
             </div>
         </div>
 
-        <div id="settings-panel">
-            <label for="setting-select">Setting:</label>
-            <select id="setting-select">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6" selected>6</option>
-            </select>
-            <button id="btn-reset">Reset Data</button>
+        <!-- Main Reel Glass Area -->
+        <div id="reel-glass">
+            <div id="reels-viewport">
+                <div class="reel-col">
+                    <div class="reel-strip" id="reel-1"></div>
+                </div>
+                <div class="reel-col">
+                    <div class="reel-strip" id="reel-2"></div>
+                </div>
+                <div class="reel-col">
+                    <div class="reel-strip" id="reel-3"></div>
+                </div>
+                <!-- Reel Shadow Overlay for curvature effect -->
+                <div class="reel-overlay"></div>
+            </div>
+
+            <!-- GOGO Lamp (Bottom Left of Glass) -->
+            <div id="gogo-lamp">
+                <div class="gogo-text">GOGO!</div>
+                <div class="gogo-sub">CHANCE</div>
+            </div>
+
+            <!-- Payout/Credit Display (Digital segments inside glass) -->
+            <div id="digital-display">
+                <div class="digi-group">
+                    <span class="digi-label">CREDIT</span>
+                    <span class="digi-val" id="credit-val">50</span>
+                </div>
+                <div class="digi-group">
+                    <span class="digi-label">PAYOUT</span>
+                    <span class="digi-val" id="payout-val">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel (Bottom) -->
+        <div id="control-panel">
+            <div id="left-controls">
+                <div id="lever-area">
+                    <div id="lever-ball"></div>
+                    <div id="lever-stick"></div>
+                    <div id="lever-base"></div>
+                </div>
+                <button id="btn-maxbet" class="round-btn">MAX<br>BET</button>
+            </div>
+
+            <div id="center-controls">
+                <div class="stop-btn-group">
+                    <button id="btn-stop-1" class="stop-btn" data-reel="0">STOP</button>
+                    <div class="btn-label">LEFT</div>
+                </div>
+                <div class="stop-btn-group">
+                    <button id="btn-stop-2" class="stop-btn" data-reel="1">STOP</button>
+                    <div class="btn-label">CENTER</div>
+                </div>
+                <div class="stop-btn-group">
+                    <button id="btn-stop-3" class="stop-btn" data-reel="2">STOP</button>
+                    <div class="btn-label">RIGHT</div>
+                </div>
+            </div>
+
+            <div id="right-controls">
+                <button id="btn-insert" class="rect-btn">INSERT<br>COIN</button>
+            </div>
+        </div>
+
+        <!-- Settings (Hidden/Overlay) -->
+        <div id="settings-overlay">
+            <label>Setting: <select id="setting-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6" selected>6</option>
+                </select></label>
+            <button id="btn-reset">RESET</button>
         </div>
     </div>
 
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
