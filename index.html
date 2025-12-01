@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Juggler EX Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="cabinet">
+            <img src="assets/cabinet.png" alt="Cabinet Background" id="cabinet-bg">
+            
+            <div id="top-panel">
+                <div id="bonus-counter">
+                    <div class="counter-group">
+                        <span class="label">BIG</span>
+                        <span class="value" id="big-count">0</span>
+                    </div>
+                    <div class="counter-group">
+                        <span class="label">REG</span>
+                        <span class="value" id="reg-count">0</span>
+                    </div>
+                    <div class="counter-group">
+                        <span class="label">GAMES</span>
+                        <span class="value" id="game-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reel-window">
+                <div class="reel-container" id="reel-1">
+                    <div class="reel-strip"></div>
+                </div>
+                <div class="reel-container" id="reel-2">
+                    <div class="reel-strip"></div>
+                </div>
+                <div class="reel-container" id="reel-3">
+                    <div class="reel-strip"></div>
+                </div>
+                
+                <div id="gogo-lamp" class="off">GOGO!</div>
+            </div>
+
+            <div id="control-panel">
+                <div id="left-controls">
+                    <button id="btn-insert" class="control-btn">INSERT</button>
+                    <div id="credit-display">CREDIT: <span id="credit-val">50</span></div>
+                    <div id="payout-display">PAYOUT: <span id="payout-val">0</span></div>
+                </div>
+
+                <div id="center-controls">
+                    <button id="btn-maxbet" class="control-btn round-btn">MAX<br>BET</button>
+                    <div id="stop-buttons">
+                        <button id="btn-stop-1" class="stop-btn" data-reel="0">STOP</button>
+                        <button id="btn-stop-2" class="stop-btn" data-reel="1">STOP</button>
+                        <button id="btn-stop-3" class="stop-btn" data-reel="2">STOP</button>
+                    </div>
+                </div>
+
+                <div id="lever-container">
+                    <div id="lever-ball"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings-panel">
+            <label for="setting-select">Setting:</label>
+            <select id="setting-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6" selected>6</option>
+            </select>
+            <button id="btn-reset">Reset Data</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

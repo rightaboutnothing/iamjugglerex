@@ -1,0 +1,247 @@
+:root {
+    --cabinet-width: 800px;
+    --cabinet-height: 600px;
+    --reel-width: 100px;
+    --reel-height: 180px; /* Visible area for 3 symbols */
+    --symbol-height: 60px;
+    --primary-color: #ff0055;
+    --accent-color: #00ffcc;
+    --gold: #ffd700;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    width: var(--cabinet-width);
+    height: var(--cabinet-height);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+#cabinet {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#cabinet-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.8;
+}
+
+/* Top Panel (Counters) */
+#top-panel {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--accent-color);
+}
+
+.counter-group {
+    text-align: center;
+}
+
+.counter-group .label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--accent-color);
+}
+
+.counter-group .value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Reel Window */
+#reel-window {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 200px;
+    background: #000;
+    border: 5px solid var(--gold);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+.reel-container {
+    width: var(--reel-width);
+    height: var(--reel-height);
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+    border-radius: 3px;
+}
+
+.reel-strip {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    /* Background image will be set via JS or CSS if static */
+    background-image: url('assets/symbols.png'); /* Placeholder, will need logic to position */
+    background-repeat: repeat-y;
+    background-size: 100% auto; 
+    /* Assuming symbols.png is a vertical strip or we map it */
+}
+
+/* GOGO Lamp */
+#gogo-lamp {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    font-style: italic;
+    color: #330000; /* Off state */
+    text-shadow: none;
+    transition: all 0.1s;
+}
+
+#gogo-lamp.on {
+    color: #ff0055;
+    text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055, 0 0 40px #ff0055;
+    animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from { text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; }
+    to { text-shadow: 0 0 20px #ff0055, 0 0 40px #ff0055, 0 0 60px #ff0055; }
+}
+
+/* Control Panel */
+#control-panel {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 150px;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-btn {
+    background: linear-gradient(to bottom, #444, #222);
+    color: white;
+    border: 2px solid #666;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 5px 0 #111;
+    active: translateY(2px);
+}
+
+.control-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 #111;
+}
+
+.round-btn {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(to bottom, #cc0000, #990000);
+    border-color: #ff3333;
+    font-size: 1rem;
+}
+
+.stop-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #0066cc, #004488);
+    border: 2px solid #3399ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #002244;
+    margin: 0 5px;
+}
+
+.stop-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 #002244;
+}
+
+.stop-btn:disabled {
+    background: #333;
+    border-color: #555;
+    color: #888;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#lever-container {
+    width: 50px;
+    height: 100px;
+    background: #111;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+}
+
+#lever-ball {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 30% 30%, #fff, #ff0000);
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    transition: top 0.1s;
+}
+
+#lever-container:active #lever-ball {
+    top: 50px;
+}
+
+#settings-panel {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.8);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
