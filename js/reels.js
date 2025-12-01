@@ -63,56 +63,20 @@ export class Reel {
             }
 
             this.updateVisualPosition();
-            requestAnimationFrame(animate);
-        };
+            const visualPos = this.position + this.totalHeight;
+            this.stripElement.style.transform = `translateY(-${visualPos}px)`;
+        }
 
-        requestAnimationFrame(animate);
+        getCurrentSymbols() {
+            // Returns the 3 visible symbols [top, center, bottom]
+            const index = Math.floor(this.position / this.symbolHeight);
+            const s = this.strip;
+            const l = s.length;
+
+            return [
+                s[index % l],
+                s[(index + 1) % l],
+                s[(index + 2) % l]
+            ];
+        }
     }
-
-    stop(targetSymbolIndex = null) {
-        return new Promise(resolve => {
-            // Simplified stop logic for now
-            // In a real machine, we'd have slip control (up to 4 frames)
-            // Here we will just stop at the nearest valid position or specific target
-
-            this.isSpinning = false;
-
-            // Snap to nearest symbol
-            // Current position in symbols
-            let currentSymIndex = Math.floor(this.position / this.symbolHeight);
-
-            // If we have a target index (0-20), we calculate distance
-            // For now, just snap to next symbol
-            let stopIndex = (currentSymIndex + 1) % this.strip.length;
-
-            // Animate to stop
-            const targetPos = stopIndex * this.symbolHeight;
-
-            // Simple snap for MVP
-            this.position = targetPos;
-            this.updateVisualPosition();
-
-            resolve(stopIndex);
-        });
-    }
-
-    updateVisualPosition() {
-        // We want to show the middle set of the 3 rendered strips
-        // Offset by 1 strip height
-        const visualPos = this.position + this.totalHeight;
-        this.stripElement.style.transform = `translateY(-${visualPos}px)`;
-    }
-
-    getCurrentSymbols() {
-        // Returns the 3 visible symbols [top, center, bottom]
-        const index = Math.floor(this.position / this.symbolHeight);
-        const s = this.strip;
-        const l = s.length;
-
-        return [
-            s[index % l],
-            s[(index + 1) % l],
-            s[(index + 2) % l]
-        ];
-    }
-}
