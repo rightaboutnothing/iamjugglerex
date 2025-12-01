@@ -87,44 +87,6 @@ body {
     background: #000;
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 15px solid #222;
-    /* Bezel */
-}
-
-#reels-viewport {
-    width: 360px;
-    height: 240px;
-    /* Visible area */
-    background: #000;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
-    position: relative;
-    border: 2px solid #444;
-}
-
-.reel-col {
-    width: 100px;
-    height: 100%;
-    background: var(--reel-bg);
-    overflow: hidden;
-    position: relative;
-    border-radius: 5px;
-    /* Slight curve look */
-}
-
-.reel-strip {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    /* JS sets background image */
-}
-
-.reel-overlay {
-    position: absolute;
-    top: 0;
     left: 0;
     width: 100%;
     height: 100%;

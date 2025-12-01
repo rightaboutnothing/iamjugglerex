@@ -6,37 +6,6 @@ export class Reel {
         this.element = element; // This IS the .reel-strip now
         this.strip = REEL_STRIPS[stripIndex];
         this.stripElement = element; // Direct reference
-        this.position = 0; // 0 to 20
-        this.isSpinning = false;
-        this.speed = 0;
-        this.stopPromise = null;
-
-        // Visual setup
-        this.symbolHeight = 60; // Matches CSS
-        this.totalHeight = this.symbolHeight * this.strip.length;
-
-        // Create visual strip
-        this.renderStrip();
-    }
-
-    renderStrip() {
-        this.stripElement.innerHTML = '';
-
-        // Render 3 copies of the strip for looping
-        for (let i = 0; i < 3; i++) {
-            this.strip.forEach(sym => {
-                const div = document.createElement('div');
-                div.style.height = '60px';
-                div.style.width = '100%';
-                div.style.backgroundImage = 'url("assets/symbols.png")';
-                div.style.backgroundSize = '100% auto';
-                div.style.backgroundPosition = `0px -${sym * 60}px`;
-                this.stripElement.appendChild(div);
-            });
-        }
-    }
-
-    spin() {
         if (this.isSpinning) return;
         this.isSpinning = true;
         this.speed = 30; // pixels per frame
